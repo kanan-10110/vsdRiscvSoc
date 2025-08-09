@@ -9,25 +9,24 @@ A complete guide and working implementation of the **RISC-V GCC Toolchain**, **S
 
 ---
 
-## 📖 Overview
-This repository contains:
-- Setup process for a **RISC-V development environment** on Rocky Linux.
-- Verified working versions of GCC Toolchain, Spike, and pk.
-- A **Unique C Test** to ensure personalized environment verification.
-- Command logs, code snippets, and workflow diagrams.
+## 📖 Summary
+This repository details the setup process for creating a RISC-V development environment on Rocky Linux. It records the verified working versions of essential components, including the GCC Toolchain, Spike ISA Simulator, and the Proxy Kernel (pk). To ensure environment personalization, it includes a Unique C Test that generates a user-specific identifier. The repository also contains complete command logs, relevant code snippets, and workflow diagrams to guide through the installation and verification process step by step.
 
 ---
 
-## 🖥️ System Environment
-| Spec      | Details |
+## 🖥️ Prerequisites
+
+### System Requirement :
+
+| Specifications | Details |
 |-----------|---------|
-| OS        | Rocky Linux 8.9 (64-bit) |
-| CPU       | 2 vCPUs |
-| RAM       | 8 GB |
-| Disk      | 30 GB |
-| Toolchain | `riscv64-unknown-elf-gcc` 8.3.0 |
-| Simulator | Spike 1.1.1-dev |
-| Kernel    | pk v1.0.0 |
+| OS        | Rocky Linux 8.0 (64-bit) |
+| CPU       | 2+ cores recommended |
+| RAM       | 4-8 GB |
+| Disk      | 30 GB free space |
+| Toolchain (GCC Compiler) | `riscv64-unknown-elf-gcc` |
+| Simulator | Spike |
+| Kernel    | pk |
 
 ---
 
