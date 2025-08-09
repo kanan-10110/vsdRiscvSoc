@@ -343,23 +343,14 @@ riscv-task2-username
 ├── factorial.c
 ├── factorial.s
 ├── factorial_main_objdump.txt
-├── factorial_output.png
-├── factorial_main_asm.png
 ├── max_array.c
 ├── max_array.s
 ├── max_array_main_objdump.txt
-├── max_array_output.png
-├── max_array_main_asm.png
 ├── bitops.c
 ├── bitops.s
 ├── bitops_main_objdump.txt
-├── bitops_output.png
-├── bitops_main_asm.png
 ├── bubble_sort.c
 ├── bubble_sort.s
 ├── bubble_sort_main_objdump.txt
-├── bubble_sort_output.png
-├── bubble_sort_main_asm.png
-├── instruction_decoding.md
 └── Task 2.md
 ```
