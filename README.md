@@ -53,3 +53,36 @@ This command will install and upgrade the **epel-release**
 
 <img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/3.png" />
 
+Now to install packages like texinfo, gperf, dtc & gcc and many more I gave the following Command:
+
+```bash
+sudo dnf install -y git vim autoconf automake make gcc gcc-c++ \
+mpfr-devel gmp-devel libmpc-devel gawk bison flex texinfo gperf \
+libtool patchutils bc zlib-devel expat-devel wget curl device-tree-compiler
+```
+
+But i got the following error 
+
+<img width="840" height="739" alt="image" src="" />
+
+### <u> Problem </u>:
+
+There was no match for Device Tree Compiler (dtc) and texinfo & gperf
+So thus i gave the following command to fix the error
+
+```bash
+sudo dnf install -y epel-release
+sudo dnf update -y
+
+sudo dnf install -y texinfo gperf
+
+dnf search texinfo
+dnf search gperf
+
+sudo dnf config-manager --set-enabled powertools
+sudo dnf config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
+sudo dnf update -y
+
+sudo dnf install -y texinfo gperf
+
+
