@@ -11,6 +11,20 @@ This repository contains the implementation and verification of 4 RISC-V C progr
 - Validate Spike simulator integration with proxy kernel
 - Generate unique, machine-specific program outputs for verification
 
+## Validating Spike Simulator
+For me, spike -version didn't work. So used a alternative command.
+```
+spike --help
+```
+<img width="1366" height="768" alt="Spike Confirmation" src="https://github.com/user-attachments/assets/43c87989-9a30-4126-b677-426791f1827f" />
+
+## GCC Toolchain Verification
+To find its version we use the following command :
+```
+riscv64-unknown-elf-gcc -v
+```
+<img width="1366" height="316" alt="GCC Toolchain Verification" src="https://github.com/user-attachments/assets/15b94e3c-6c44-4200-97fa-32f109dcf203" />
+
 ## 🔍 Step-by-Step Implementation
 # A.Uniqueness Mechanism Setup
 First, set identity variables in the Rocky Linux host shell:
@@ -263,8 +277,6 @@ riscv64-unknown-elf-objdump -d ./bubble_sort | sed -n '/<main>:/,/^$/p' > bubble
 <img width="1242" height="404" alt="Disassemble Bubble_sort" src="https://github.com/user-attachments/assets/4dd6c5bb-7d54-4e04-99d5-8ddb85537027" />
 
 # F. RISC-V Integer Instruction Decoding
-# RISC-V Integer Instruction Decoding
-
 This document decodes 5 RISC-V integer instructions extracted from the provided objdump files.
 
 ## Instruction Format Reference
