@@ -63,7 +63,7 @@ libtool patchutils bc zlib-devel expat-devel wget curl device-tree-compiler
 
 But I got the following error 
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/4.png" />
 
 ### Problem:
 
@@ -88,7 +88,9 @@ sudo dnf install -y texinfo gperf
 
 And I got the problem fixed and all the packages were installed:
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/5.png" />
+
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/6.png" />
 
 
 
