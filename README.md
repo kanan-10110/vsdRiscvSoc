@@ -33,9 +33,23 @@ This repository details the setup process for creating a RISC-V development envi
 ## 🛠️ Installation Workflow
 
 ### 1️⃣ Install Base Developer Tools
+
+- The First Command is:
+
 ```bash
 sudo dnf groupinstall -y "Development Tools"
+```
+
+This will give you the following message:
+
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/1.png" />
+
+After this give the following Command:
+```bash
 sudo dnf install -y epel-release
 ```
 
-<img width="840" height="739" alt="image" src="" />
+This command will install and upgrade the **epel-release**
+
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/3.png" />
+
