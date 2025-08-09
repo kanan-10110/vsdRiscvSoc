@@ -92,5 +92,14 @@ And I got the problem fixed and all the packages were installed:
 
 <img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/6.png" />
 
+After this I installed Device Tree Compiler (dtc) using this command:
+
+```bash
+sudo dnf install -y dtc
+```
+
+<img width="840" height="739" alt="image" src="" />
+
+And thus dtc was installed 
 
 
