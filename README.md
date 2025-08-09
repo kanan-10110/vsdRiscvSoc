@@ -169,7 +169,8 @@ make -j$(nproc)
 sudo make install
 ```
 
-<img width="840" height="739" alt="image" src="" />
+<img width="1366" height="768" alt="11" src="https://github.com/user-attachments/assets/2bd480e4-3b3d-4e1c-ab53-0c778bf21820" />
+
 
 After running this code I got an error mcmodel and to resolve that I followed the given procedure 
 
