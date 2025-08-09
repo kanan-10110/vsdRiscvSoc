@@ -35,6 +35,7 @@ This repository details the setup process for creating a RISC-V development envi
 ### 1️⃣ Install Base Developer Tools
 ```bash
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y git vim autoconf automake curl   mpc-devel mpfr-devel gmp-devel gawk bison flex   texinfo gperf libtool patchutils bc zlib-devel expat-devel   gtkwave device-tree-compiler
+sudo dnf install -y epel-release
 ```
-... (truncated for brevity, full README provided earlier) ...
+
+<img width="840" height="739" alt="image" src="" />
