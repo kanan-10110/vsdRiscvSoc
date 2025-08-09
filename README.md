@@ -1,7 +1,7 @@
 # 🛠️ RISC-V Toolchain Setup & Unique C Test — Rocky Linux
 
 [![RISC-V](https://img.shields.io/badge/Architecture-RISC--V-blue.svg)](https://riscv.org/)
-[![Toolchain](https://img.shields.io/badge/Toolchain-GCC%208.3.0-blueviolet.svg)]()
+[![Toolchain](https://img.shields.io/badge/Toolchain-GCC%208.3.0-blueviolet.svg)](https://gcc.gnu.org/releases.html)
 [![Platform](https://img.shields.io/badge/Platform-Rocky%20Linux-green.svg)](https://rockylinux.org/)
 [![Status](https://img.shields.io/badge/Status-✅%20Complete-success.svg)]()
 
