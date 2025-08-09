@@ -218,11 +218,100 @@ sudo make install
 
 This shows that the Proxy Kernel is installed and the location is given 
 
-###
+## Quick Sanity Check
 
+### Checking the **PK, Spike and gcc**
 
+```bash
+which riscv64-unknown-elf-gcc
+riscv64-unknown-elf-gcc -v
+which gcc   
+which spike                  
+which pk                  
+spike --help
+```
 
+<img width="1366" height="461" alt="Quick Sanity Check" src="https://github.com/user-attachments/assets/8b302ab1-21b6-4b2e-b6c1-935b702f0897" />
 
+# A Unique C Test (Username & Machine Dependent)
 
+## Create unique_test.c
+
+Create a file named unique_test.c by this command 
+
+```bash
+vi unique_test.c1
+```
+Now write the following command
+
+```bash
+#include <stdint.h>
+#include <stdio.h>
+
+#ifndef Kanan_Bajaj
+#define Kanan_Bajaj "Kanan_Bajaj"
+#endif
+#ifndef PDEU
+#define PDEU "PDEU"
+#endif
+
+// 64-bit FNV-1a hash function
+static uint64_t fnv1a64(const char *s) {
+    const uint64_t FNV_OFFSET = 1469598103934665603ULL;
+    const uint64_t FNV_PRIME  = 1099511628211ULL;
+    uint64_t h = FNV_OFFSET;
+    for (const unsigned char *p = (const unsigned char*)s; *p; ++p) {
+        h ^= (uint64_t)(*p);
+        h *= FNV_PRIME;
+    }
+    return h;
+}
+
+int main(void) {
+    const char *user = Kanan_Bajaj;
+    const char *host = PDEU;
+
+    char buf[256];
+    int n = snprintf(buf, sizeof(buf), "%s@%s", user, host);
+    if (n <= 0) return 1;
+
+    uint64_t uid = fnv1a64(buf);
+
+    printf("RISC-V Uniqueness Check\n");
+    printf("User: %s\n", user);
+    printf("Host: %s\n", host);
+    printf("UniqueID: 0x%016llx\n", (unsigned long long)uid);
+
+#ifdef __VERSION__
+    unsigned long long vlen = (unsigned long long)sizeof(__VERSION__) - 1;
+    printf("GCC_VLEN: %llu\n", vlen);
+#endif
+
+    return 0;
+}
+
+```
+This will help generate a Unique ID 
+
+## Compile with injected identity and RISC‑V flags
+
+Compile using the below code:
+
+```bash
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64imac -mabi=lp64 \
+  -DUSERNAME="$(id -un)" -DHOSTNAME="$(hostname -s)" \
+  unique_test.c -o unique_test
+```
+
+## Run on Spike with the proxy kernel
+
+Run it using the following Command:
+
+```bash
+spike pk ./unique_test
+```
+<img width="1366" height="768" alt="Kanan_Unique_ID" src="https://github.com/user-attachments/assets/055876e8-c115-46ce-986c-6dce9779e962" />
+
+This will finally generate the Unique ID required.
 
 
