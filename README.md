@@ -61,14 +61,14 @@ mpfr-devel gmp-devel libmpc-devel gawk bison flex texinfo gperf \
 libtool patchutils bc zlib-devel expat-devel wget curl device-tree-compiler
 ```
 
-But i got the following error 
+But I got the following error 
 
 <img width="840" height="739" alt="image" src="" />
 
-### <u> Problem </u>:
+### Problem:
 
 There was no match for Device Tree Compiler (dtc) and texinfo & gperf
-So thus i gave the following command to fix the error
+So thus I gave the following command to fix the error
 
 ```bash
 sudo dnf install -y epel-release
@@ -84,5 +84,11 @@ sudo dnf config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 sudo dnf update -y
 
 sudo dnf install -y texinfo gperf
+```
+
+And I got the problem fixed and all the packages were installed:
+
+<img width="840" height="739" alt="image" src="" />
+
 
 
