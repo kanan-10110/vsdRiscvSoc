@@ -235,9 +235,9 @@ spike --help
 
 # A Unique C Test (Username & Machine Dependent)
 
-## Create unique_test.c
+## Create unique_test.c1
 
-Create a file named unique_test.c by this command 
+Create a file named unique_test.c1 by this command 
 
 ```bash
 vi unique_test.c1
@@ -308,9 +308,10 @@ riscv64-unknown-elf-gcc -O2 -Wall -march=rv64imac -mabi=lp64 \
 Run it using the following Command:
 
 ```bash
-spike pk ./unique_test
+spike pk ./unique_test1
 ```
-<img width="1366" height="768" alt="Kanan_Unique_ID" src="https://github.com/user-attachments/assets/055876e8-c115-46ce-986c-6dce9779e962" />
+
+<img width="504" height="161" alt="Kanan_Unique_ID" src="https://github.com/user-attachments/assets/2e240aa1-49a2-4f5b-8a3d-81642778fb6a" />
 
 This will finally generate the Unique ID required.
 
