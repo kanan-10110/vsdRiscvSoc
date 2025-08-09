@@ -42,7 +42,7 @@ sudo dnf groupinstall -y "Development Tools"
 
 This will give you the following message:
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/1.png" />
+<img width="1366" height="768" alt="1" src="https://github.com/user-attachments/assets/f1275199-8442-433d-a9d5-f22378a87713" />
 
 After this give the following Command:
 ```bash
@@ -51,7 +51,7 @@ sudo dnf install -y epel-release
 
 This command will install and upgrade the **epel-release**
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/3.png" />
+<img width="1366" height="768" alt="3" src="https://github.com/user-attachments/assets/268764e9-01a0-4bb5-94e3-3ce1d88cdd81" />
 
 Now to install packages like texinfo, gperf, dtc & gcc and many more I gave the following Command:
 
@@ -63,7 +63,7 @@ libtool patchutils bc zlib-devel expat-devel wget curl device-tree-compiler
 
 But I got the following error 
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/4.png" />
+<img width="1366" height="768" alt="4" src="https://github.com/user-attachments/assets/2ec7db46-dcf7-4188-b2e0-44bc59145da3" />
 
 ### Problem:
 
@@ -88,9 +88,8 @@ sudo dnf install -y texinfo gperf
 
 And I got the problem fixed and all the packages were installed:
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/5.png" />
-
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/6.png" />
+<img width="1366" height="768" alt="5" src="https://github.com/user-attachments/assets/47a33fbd-ac0f-4758-8df3-6703b3689f08" />
+<img width="1366" height="768" alt="6" src="https://github.com/user-attachments/assets/69c53d65-719e-4aa7-9249-34146d66f4ec" />
 
 After this I installed Device Tree Compiler (dtc) using this command:
 
@@ -98,7 +97,7 @@ After this I installed Device Tree Compiler (dtc) using this command:
 sudo dnf install -y dtc
 ```
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/7.png" />
+<img width="1366" height="768" alt="7" src="https://github.com/user-attachments/assets/a4a02f8c-49b2-465b-b721-7454a8142fe5" />
 
 And thus dtc was installed 
 
@@ -117,7 +116,7 @@ mkdir -p riscv_toolchain
 cd riscv_toolchain
 ```
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/8.png" />
+<img width="436" height="132" alt="8" src="https://github.com/user-attachments/assets/26ddc7e1-1e86-42b1-b0eb-3f38c1561f7f" />
 
 This shows that our Directory is created and we are in that directory. After this we have to add the prebuild gcc tollchain to our path.
 
@@ -130,7 +129,7 @@ wget "https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.3.0-2019
 tar -xvzf riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14.tar.gz
 ```
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/9.png" />
+<img width="1366" height="768" alt="9" src="https://github.com/user-attachments/assets/8ea69c06-9ca0-4c1c-8ecd-80ade3379715" />
 
 Our gcc toolchain is installed successfully and now we need to install spike ad proxy kernel
 
@@ -153,7 +152,7 @@ export PATH=$HOME/riscv/bin:$PATH
 which spike
 ```
 
-<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/10.png" />
+<img width="1280" height="1024" alt="10" src="https://github.com/user-attachments/assets/715e99b7-6c9f-4faf-961a-9befaee30ea5" />
 
 This has installed spike 
 
@@ -171,7 +170,6 @@ sudo make install
 
 <img width="1366" height="768" alt="11" src="https://github.com/user-attachments/assets/2bd480e4-3b3d-4e1c-ab53-0c778bf21820" />
 
-
 After running this code I got an error mcmodel and to resolve that I followed the given procedure 
 
 ```bash
@@ -186,6 +184,41 @@ source ~/set_riscv_env.sh
 ```
 
 **This command activated the RISC-V toolchain environment.**
+
+```bash
+cat > ~/set_native_env.sh <<'EOF'
+#!/bin/bash
+# Restore native Linux environment paths
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
+echo "Native Linux environment restored."
+hash -r  # Clear shell command cache
+EOF
+chmod +x ~/set_native_env.sh
+source ~/set_native_env.sh
+```
+**This command activated the Native Linux environment.**
+
+After this I gave the following command -
+
+```bash
+
+cd $pwd/riscv_toolchain
+rm -rf riscv-pk  # Remove problematic version
+git clone https://github.com/riscv/riscv-pk.git
+cd riscv-pk
+git checkout v1.0.0
+mkdir -p build && cd build
+../configure --prefix=$pwd/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14 --host=riscv64-unknown-elf
+make -j$(nproc)
+sudo make install
+```
+
+<img width="1280" height="1024" alt="12" src="https://github.com/user-attachments/assets/40df8b20-5bf4-481b-8ff3-0ee62b0d0692" />
+
+This shows that the Proxy Kernel is installed and the location is given 
+
+###
 
 
 
