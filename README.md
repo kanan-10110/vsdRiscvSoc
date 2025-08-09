@@ -98,7 +98,7 @@ After this I installed Device Tree Compiler (dtc) using this command:
 sudo dnf install -y dtc
 ```
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/7.png" />
 
 And thus dtc was installed 
 
@@ -117,7 +117,7 @@ mkdir -p riscv_toolchain
 cd riscv_toolchain
 ```
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/8.png" />
 
 This shows that our Directory is created and we are in that directory. After this we have to add the prebuild gcc tollchain to our path.
 
@@ -130,7 +130,7 @@ wget "https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.3.0-2019
 tar -xvzf riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14.tar.gz
 ```
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/9.png" />
 
 Our gcc toolchain is installed successfully and now we need to install spike ad proxy kernel
 
@@ -153,7 +153,7 @@ export PATH=$HOME/riscv/bin:$PATH
 which spike
 ```
 
-<img width="840" height="739" alt="image" src="" />
+<img width="840" height="739" alt="image" src="https://github.com/kanan-10110/vsdRiscvSoc/blob/main/10.png" />
 
 This has installed spike 
 
@@ -184,7 +184,7 @@ chmod +x ~/set_riscv_env.sh
 source ~/set_riscv_env.sh
 ```
 
-*This command activated the RISC-V toolchain environment.**
+**This command activated the RISC-V toolchain environment.**
 
 
 
