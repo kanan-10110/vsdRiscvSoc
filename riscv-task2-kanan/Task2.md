@@ -26,7 +26,7 @@ riscv64-unknown-elf-gcc -v
 <img width="1366" height="316" alt="GCC Toolchain Verification" src="https://github.com/user-attachments/assets/15b94e3c-6c44-4200-97fa-32f109dcf203" />
 
 ## 🔍 Step-by-Step Implementation
-# A.Uniqueness Mechanism Setup
+### A. Uniqueness Mechanism Setup
 First, set identity variables in the Rocky Linux host shell:
 ```
 export U=$(id -un)
@@ -37,7 +37,7 @@ export E=$(date +%s)
 ```
 <img width="594" height="174" alt="Step 1" src="https://github.com/user-attachments/assets/e481e16d-a27b-414e-a347-50bfefc45edc" />
 
-## B. Common Header (unique.h)
+### B. Common Header (unique.h)
 ```
 #ifndef UNIQUE_H
 #define UNIQUE_H
@@ -95,12 +95,12 @@ printf("===========================\n");
 ```
 <img width="1013" height="871" alt="Unique h image" src="https://github.com/user-attachments/assets/51a61512-a443-40d6-b7ec-24afc7b682ae" />
 
-### C. C. Program Implementation
+### C. C - Program Implementation
 Now we create files in vi editor
 <img width="823" height="176" alt="Files Created" src="https://github.com/user-attachments/assets/722f8035-de2a-4635-a3ee-0da93d490995" />
 
 Each program must include unique.h and print the header first.
-# 1. factorial.c
+## 1. factorial.c
 ```
 #include "unique.h"
 static unsigned long long fact(unsigned n){ return (n<2)?1ULL:n*fact(n-1); }
@@ -159,57 +159,58 @@ return 0;
 <img width="798" height="252" alt="bubble_sort" src="https://github.com/user-attachments/assets/62369251-4eb7-4e93-a2cd-9eb47aec8adb" />
 
 ### D. Build, Run, and Capture Evidence
+
 # Program 1: Factorial
-# Compile
+## Compile
 ```
 riscv64-unknown-elf-gcc -O0 -g -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
     -DBUILD_UTC="\"$T\"" -DBUILD_EPOCH=$E \
     factorial.c -o factorial
 ```
-# Run
+## Run
 ```
 spike pk ./factorial
 ```
 <img width="1366" height="336" alt="Spike Factorial" src="https://github.com/user-attachments/assets/8797decf-f7d6-4c06-8295-08a7afa86385" />
 
 # Program 2: max_array
-# Compile
+## Compile
 ```
 riscv64-unknown-elf-gcc -O0 -g -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
     -DBUILD_UTC="\"$T\"" -DBUILD_EPOCH=$E \
     max_array.c -o max_array
 ```
-# Run
+## Run
 ```
 spike pk ./max_array
 ```
 <img width="535" height="273" alt="Spike_Max Array" src="https://github.com/user-attachments/assets/2c494eb6-e242-4eff-9bc8-33b47169e1bd" />
 
 # Program 3: bitops
-# Compile
+## Compile
 ```
 riscv64-unknown-elf-gcc -O0 -g -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
     -DBUILD_UTC="\"$T\"" -DBUILD_EPOCH=$E \
     bitops.c -o bitops
 ```
-# Run
+## Run
 ```
 spike pk ./bitops
 ```
 <img width="1366" height="388" alt="Spike bitops" src="https://github.com/user-attachments/assets/cb1faebb-3c27-42dc-bf50-42c6d2c16bba" />
 
 # Program 4: bubble_sort
-# Compile
+## Compile
 ```
 riscv64-unknown-elf-gcc -O0 -g -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
     -DBUILD_UTC="\"$T\"" -DBUILD_EPOCH=$E \
     bubble_sort.c -o bubble_sort
 ```
-# Run
+## Run
 ```
 spike pk ./bubble_sort
 ```
@@ -217,22 +218,22 @@ spike pk ./bubble_sort
 
 ### E. Produce Assembly and Disassembly
 
-## factorial
-# Generate Assembly:
+## Factorial
+## Generate Assembly:
 ```
 riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
     -DBUILD_UTC="\"$T\"" -DBUILD_EPOCH=$E \
     factorial.c -o factorial.s
 ```
-# Generate Disassembly:
+## Generate Disassembly:
 ```
 riscv64-unknown-elf-objdump -d ./factorial | sed -n '/<main>:/,/^$/p' > factorial_main_objdump.txt
 ```
 <img width="1366" height="562" alt="Disassemble Factorial" src="https://github.com/user-attachments/assets/d4568131-6783-4a35-bced-5b7674f8eea4" />
 
-### max_array
-# Generate Assembly:
+## max_array
+## Generate Assembly:
 ```
 riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
@@ -240,14 +241,14 @@ riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     max_array.c -o max_array.s
 ```
 
-# Generate Disassembly:
+## Generate Disassembly:
 ```
 riscv64-unknown-elf-objdump -d ./max_array | sed -n '/<main>:/,/^$/p' > max_array_main_objdump.txt
 ```
 <img width="1239" height="329" alt="Disassemble Max_Array" src="https://github.com/user-attachments/assets/2cb19065-55aa-4a30-8dcc-ee1265afab34" />
 
 ## bitops
-# Generate Assembly:
+## Generate Assembly:
 ```
 riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
@@ -255,14 +256,14 @@ riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     bitops.c -o bitops.s
 ```
 
-# Generate Disassembly:
+## Generate Disassembly:
 ```
 riscv64-unknown-elf-objdump -d ./bitops | sed -n '/<main>:/,/^$/p' > bitops_main_objdump.txt
 ```
 <img width="1188" height="334" alt="Disassemble Bitops" src="https://github.com/user-attachments/assets/0052ac82-103d-41bb-98bb-d762d3bf0968" />
 
 ## bubble_sort
-# Generate Assembly:
+## Generate Assembly:
 ```
 riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     -DUSERNAME="\"$U\"" -DHOSTNAME="\"$H\"" -DMACHINE_ID="\"$M\"" \
@@ -270,13 +271,13 @@ riscv64-unknown-elf-gcc -O0 -S -march=rv64imac -mabi=lp64 \
     bubble_sort.c -o bubble_sort.s
 ```
 
-# Generate Disassembly:
+## Generate Disassembly:
 ```
 riscv64-unknown-elf-objdump -d ./bubble_sort | sed -n '/<main>:/,/^$/p' > bubble_sort_main_objdump.txt
 ```
 <img width="1242" height="404" alt="Disassemble Bubble_sort" src="https://github.com/user-attachments/assets/4dd6c5bb-7d54-4e04-99d5-8ddb85537027" />
 
-# F. RISC-V Integer Instruction Decoding
+### F. RISC-V Integer Instruction Decoding
 This document decodes 5 RISC-V integer instructions extracted from the provided objdump files.
 
 ## Instruction Format Reference
