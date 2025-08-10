@@ -315,54 +315,150 @@ spike pk ./unique_test1
 
 This will finally generate the Unique ID required.
 
+# RISC-V Toolchain Setup: Issues, Learning Points & Troubleshooting
+
+## 🔥 Installation Issues Faced
+
+### 1. Cross-Compiler PATH Interference
+- **Problem:** RISC-V cross-compiler tools interfere with native x86-64 compilation
+- **Impact:** Native builds fail because wrong assembler is used for host architecture
+- **Solution:** Temporary PATH isolation during native tool compilation
+
+### 2. Shell Command Expansion Issues
+- **Problem:** Shell command substitution creates unquoted tokens for C preprocessor
+- **Impact:** Preprocessor sees separate identifiers instead of single string constants
+- **Solution:** Use explicit string literals to bypass problematic shell expansion
+
+### 3. Installation Path Configuration
+- **Problem:** Tools install to non-standard locations not included in default PATH
+- **Impact:** Successfully installed tools appear missing and unusable
+- **Solution:** Permanent PATH updates to include all installation directories
+
+### 4. Package Dependencies Missing
+- **Issue:** Device Tree Compiler (dtc), texinfo, and gperf packages not found initially
+- **Root Cause:** EPEL repository not enabled and PowerTools/CodeReady Builder repositories disabled
+- **Resolution Steps:**
+  - Enable EPEL release repository
+  - Enable PowerTools and CodeReady Builder repositories
+  - Update package cache and install missing dependencies
+
+### 5. Proxy Kernel Build Errors
+- **Issue:** mcmodel compatibility errors during riscv-pk compilation
+- **Root Cause:** Version conflicts and incorrect host configuration
+- **Solution:** Use specific stable version (v1.0.0) with proper host target specification
+
 ## 🎯 Key Learning Points
 
-### **🔍 Debugging Methodology**
-- **Multi-stage investigation**: Complex toolchain issues require systematic debugging across multiple layers and components
-- **Root cause analysis**: Surface-level errors often mask deeper compatibility or configuration problems that need isolation
-- **Component isolation testing**: Test individual tools and dependencies separately to identify conflicting or interfering sources
+### 🔍 Debugging Methodology
+- **Multi-stage investigation:** Complex toolchain issues require systematic debugging across multiple layers and components
+- **Root cause analysis:** Surface-level errors often mask deeper compatibility or configuration problems that need isolation
+- **Component isolation testing:** Test individual tools and dependencies separately to identify conflicting or interfering sources
 
-### **⚙️ Toolchain Management**
-- **Version synchronization**: Ensure compiler, binutils, libraries, and target architecture support align across the entire toolchain
-- **Environment isolation**: Separate cross-compilation and native build environments to prevent PATH pollution and tool conflicts
-- **Dependency verification**: Validate that all required libraries, headers, and runtime components are present and compatible
+### ⚙️ Toolchain Management
+- **Version synchronization:** Ensure compiler, binutils, libraries, and target architecture support align across the entire toolchain
+- **Environment isolation:** Separate cross-compilation and native build environments to prevent PATH pollution and tool conflicts
+- **Dependency verification:** Validate that all required libraries, headers, and runtime components are present and compatible
 
-### **📋 Configuration Best Practices**
-- **Persistent environment setup**: Configure PATH, environment variables, and aliases in shell profiles (`.bashrc`, `.zshrc`) for consistency
-- **Incremental validation**: Test and verify each installation and configuration step before proceeding to prevent cascading failures
-- **Configuration versioning**: Document and backup working configurations, environment setups, and successful build procedures for reproducibility
+### 📋 Configuration Best Practices
+- **Persistent environment setup:** Configure PATH, environment variables, and aliases in shell profiles (`.bashrc`, `.zshrc`) for consistency
+- **Incremental validation:** Test and verify each installation and configuration step before proceeding to prevent cascading failures
+- **Configuration versioning:** Document and backup working configurations, environment setups, and successful build procedures for reproducibility
 
 ## ⚡ Quick Troubleshooting Reference
 
-### **💥 Build Breaks? Start Here:**
+### 🛠️ Build Breaks? Start Here:
+
+**Verify active tools:**
 ```bash
-# Verify active tools
 which gcc && which as && which ld
+```
 
-# Check library links
+**Check library links:**
+```bash
 ldd your_binary 2>/dev/null || echo "Static binary or missing libs"
+```
 
-# Get detailed error context
+**Get detailed error context:**
+```bash
 make VERBOSE=1 2>&1 | tee build.log
 ```
 
-### **🔧 PATH Hell? Debug Fast:**
+### 🛤️ PATH Hell? Debug Fast:
+
+**See what's in your PATH:**
 ```bash
-# See what's in your PATH
 echo $PATH | sed 's/:/\n/g' | nl
+```
 
-# Test with clean environment
+**Test with clean environment:**
+```bash
 env -i PATH="/usr/bin:/bin" your_command
+```
 
-# Verify tool locations
+**Verify tool locations:**
+```bash
 ls -la $(which gcc) && readlink -f $(which gcc)
 ```
 
-### **🎯 Version Conflicts? Quick Fixes:**
-- **Check compatibility**: `gcc --version` + `as --version` + `ld --version`
-- **Find alternatives**: `apt list --installed | grep gcc` or `ls /usr/bin/*gcc*`
-- **Container escape**: `docker run --rm -v $PWD:/work -w /work gcc:9 make`
-- **Version lock**: Pin specific versions in `requirements.txt` or `Dockerfile`
+### ⚠️ Version Conflicts? Quick Fixes:
 
+**Force specific toolchain versions:**
+```bash
+export CC=/path/to/specific/gcc
+export CXX=/path/to/specific/g++
+```
 
+**Isolate build environments:**
+```bash
+# Create clean environment scripts
+~/set_riscv_env.sh    # Activate RISC-V toolchain
+~/set_native_env.sh   # Restore native environment
+```
 
+**Verify compatibility matrix:**
+```bash
+riscv64-unknown-elf-gcc --version
+spike --version
+pk --help
+```
+
+### 🔧 Emergency Recovery Commands:
+
+**Reset PATH completely:**
+```bash
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin"
+hash -r  # Clear shell command cache
+```
+
+**Clean and rebuild from scratch:**
+```bash
+rm -rf build/
+make clean distclean 2>/dev/null || true
+mkdir build && cd build
+```
+
+**Verify system dependencies:**
+```bash
+dnf list installed | grep -E "(gcc|binutils|glibc-devel)"
+```
+
+## 🏗️ Environment Management Scripts
+
+The documentation shows two critical environment management scripts:
+
+### RISC-V Environment Activation:
+```bash
+#!/bin/bash
+export PATH=/root/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin:$PATH
+echo "RISC-V toolchain environment activated."
+```
+
+### Native Environment Restoration:
+```bash
+#!/bin/bash
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
+echo "Native Linux environment restored."
+hash -r  # Clear shell command cache
+```
+
+These scripts prevent PATH conflicts between cross-compilation and native development workflows.
