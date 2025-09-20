@@ -49,17 +49,11 @@ $ sudo apt-get install build-essential clang bison flex \
     libboost-python-dev libboost-filesystem-dev zlib1g-dev
 $ make config-gcc
 $ make
-```
-<img width="514" height="673" alt="make install successful" src=" " />
-```
 $ sudo make install
-```
-<img width="902" height="229" alt="yosys install" src=" " />
-
-```
 $ yosys
 ```
-<img width="830" height="185" alt="Yosys" src=" " />
+![Yosys](https://github.com/user-attachments/assets/374c997e-5286-408b-9341-46c7587d795c)
+
 
 #### <ins>**Iverilog**</ins>
 Icarus Verilog provides a robust simulation platform for comprehensive design verification and validation. Its event-driven simulation engine supports complex testbench scenarios, enabling thorough functional coverage analysis and corner case testing essential for first-silicon success.
@@ -68,8 +62,8 @@ $ sudo apt-get update
 $ sudo apt-get install iverilog
 $ iverilog -v
 ```
-<img width="1022" height="421" alt="IVerilog Installation" src=" " />
-<img width="1022" height="671" alt="iVerilog Installed" src=" " />
+![iverilog](https://github.com/user-attachments/assets/f0b34e06-9936-422b-9c63-97d5fa9bb3ee)
+
 
 #### <ins>**GTKWave - Waveform Viewer**</ins>
 GTKWave delivers advanced signal analysis capabilities for debugging complex digital systems. Its multi-domain visualization features and hierarchical signal browsing enable efficient identification of timing violations, protocol errors, and functional anomalies across large-scale designs.
@@ -78,8 +72,8 @@ $ sudo apt-get update
 $ sudo apt install gtkwave
 $ gtkwave
 ```
-<img width="1005" height="767" alt="gtkwave" src=" " />
-<img width="1087" height="845" alt="gtkwave_2" src=" " />
+![gtkwave](https://github.com/user-attachments/assets/4382aba3-485a-4bfd-b73d-95187900c3f8)
+
 
 # Conclusion
 The successful deployment of Yosys, Icarus Verilog, and GTKWave establishes a professional-grade open-source EDA environment capable of handling industrial-scale digital design challenges. This integrated toolchain provides comprehensive coverage of the verification-synthesis-analysis workflow, enabling designers to achieve production-quality results while maintaining cost-effectiveness and flexibility. The foundation created through this setup empowers engineers to tackle advanced ASIC development projects and contributes to the growing ecosystem of open-source semiconductor design innovation.
