@@ -1,4 +1,4 @@
-#!/bin/bash
+
 # EDA Tools Automated Setup Script
 # Tools: Yosys, Iverilog, GTKWave
 
